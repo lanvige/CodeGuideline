@@ -32,11 +32,11 @@ if (xxx == yyy)  {
 - Switch
 ``` ObjC
 switch (state) {
-        case AFOperationReadyState:
-            break;
-        default:
-            break;
-    }
+	case AFOperationReadyState:
+		break;
+	default:
+		break;
+}
 
 // 若是case里有逻辑语句
 switch (state) {
