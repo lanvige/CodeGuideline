@@ -37,7 +37,6 @@ switch (state) {
 	default:
 		break;
 }
-
 // 若是case里有逻辑语句
 switch (state) {
 	case AFOperationReadyState: {
