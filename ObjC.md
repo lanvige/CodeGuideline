@@ -30,23 +30,24 @@ if (xxx == yyy)  {
 ```
 
 - Switch
-``` ObjC
-switch (state) {
-	case AFOperationReadyState:
-		break;
-	default:
-		break;
-}
-// 若是case里有逻辑语句
-switch (state) {
-	case AFOperationReadyState: {
-		// logic statement
-		break;
+
+	``` ObjC
+	switch (state) {
+		case AFOperationReadyState:
+			break;
+		default:
+			break;
 	}
-	default:
-		break;
-}
-```
+	// 若是case里有逻辑语句
+	switch (state) {
+		case AFOperationReadyState: {
+			// logic statement
+			break;
+		}
+		default:
+			break;
+	}
+	```
 
 - 所有赋值方法后的参数名都是name_
 ``` ObjC
@@ -135,11 +136,12 @@ switch (state) {
 	- @class性能会高一点，因为编译器不需要处理整个ClassName.h文件，只需要知道ClassName是一个类名字。
 	- 如果需要引用该类中的方法，则@class是不行的，因为编译器需要更多的消息。要知道方法有多少参数，什么类型，方法的返回类型。
 - 线程写法
-``` ObjC
-// Defer some stuff to make launching faster
-dispatch_async(dispatch_get_main_queue(), ^{
-});
-```
+
+	``` ObjC
+	// Defer some stuff to make launching faster
+	dispatch_async(dispatch_get_main_queue(), ^{
+	});
+	```
 
 ###ARC
 
