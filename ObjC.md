@@ -6,6 +6,7 @@
 - 文件名首字母大写，以后每个单词首字母大写
 - 类的定义和文件名相同
 - 属性和方法则是首字母小写，以后每个单词首字母大写
+- 常量的定义用k开头，后面单词首字母大写 `kAFNetworkingDownload`
 - Controls命名用全写，如下
 	- userAvatarImageView 
 	- deleteButton
@@ -77,19 +78,20 @@ if (xxx == yyy)  {
 ###CocoaTouch
 
 - View初始化
-``` ObjC
-@property (nonatomic, strong) SSLabel *upgradeLabel;  
+
+	``` ObjC
+	@property (nonatomic, strong) SSLabel *upgradeLabel;  
 	
-- (SSLabel *)upgradeLabel {
-    if (!_upgradeLabel) {
-         _upgradeLabel = [[SSLabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 60.0f)];
-         _upgradeLabel.font = [UIFont cheddarInterfaceFontOfSize:14.0f];
-         _upgradeLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-         _upgradeLabel.userInteractionEnabled = YES;
+	- (SSLabel *)upgradeLabel {
+    	if (!_upgradeLabel) {
+        	_upgradeLabel = [[SSLabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 60.0f)];
+         	_upgradeLabel.font = [UIFont cheddarInterfaceFontOfSize:14.0f];
+         	_upgradeLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+         	_upgradeLabel.userInteractionEnabled = YES;
+		}
+    	return _upgradeLabel;
 	}
-    return _upgradeLabel;
-}
-```
+	```
 
 # 注释
 
@@ -132,6 +134,7 @@ if (xxx == yyy)  {
 ```
 
 ###性能
+
 - 头文件中的引用使用@class，而非#import，import放在.m文件中
 	- @class性能会高一点，因为编译器不需要处理整个ClassName.h文件，只需要知道ClassName是一个类名字。
 	- 如果需要引用该类中的方法，则@class是不行的，因为编译器需要更多的消息。要知道方法有多少参数，什么类型，方法的返回类型。
@@ -141,6 +144,38 @@ if (xxx == yyy)  {
 	// Defer some stuff to make launching faster
 	dispatch_async(dispatch_get_main_queue(), ^{
 	});
+	```
+- 常量定义
+	- #define 宏
+	
+	```
+	#define kDefaultDomainURL @"http.service.urlprefix.default"
+	// 这种方式定义后，可在其它地方直接使用，方便简单，其就是在编译时期为作编译参数传入，编译时不会对其进行类型检测，也无法对常量进行指针比较操作。适合于？
+	```
+	- extern
+	
+	```
+	// .h define
+	extern NSString *const kFontDefaultsKey;
+	// .m implenment
+	NSString *const kFontDefaultsKey = @"FontDefaults";
+	..
+	// 这是推荐的定义全局字符常量的方式
+	// 修饰符extern用在变量或者函数的声明前，用来说明“此变量/函数是在别处定义的，要在此处引用”。
+	// extern 使得该常量可以在同一个工程的其它源文件中被访问(只需用extern进行声明即可)。
+	```
+	- static
+
+	```
+	static NSString *const cellIdentifier = @"cellIdentifier";
+	// static 可以用来修饰局部变量，全局变量
+	```
+	- const
+
+	```
+	NSString *const kFontDefaultsKey = @"FontDefaults";
+	// const数据成员只在某个对象生存期内是常量，而对于整个类而言却是可变的。因为类可以创建多个对象，不同的对象其const数据成员的值可以不同。所以不能在类声明中初始化const数据成员，因为类的对象未被创建时，编译器不知道const 数据成员的值是什么。
+	// const数据成员的初始化只能在类的构造函数的初始化表中进行。要想建立在整个类中都恒定的常量，应该用类中的枚举常量来实现，或者static const。
 	```
 
 ###ARC
