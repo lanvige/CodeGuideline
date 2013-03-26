@@ -154,12 +154,23 @@ NSNumber *noNumber = @NO;      // 相当于 [NSNumber numberWithBool:NO]
 ######NSArray
 
 ``` ObjC
-- NSArray = @[obj, obj];
+// Old style
+NSArray *items = [NSArray arrayWithObjects:@"item1",
+                  [NSNumber numberWithBool:YES],
+                  [NSNumber numberWithInt:12], nil];
+// New style
+NSArray *items = @[ @"item1", @YES, @12 ];
 ```
 
 ######NSDictionary
 
 ``` ObjC
+// Old style
+NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                         [NSNumber numberWithBool:YES], @"backup",
+                         [NSNumber numberWithInt:7],    @"daysToKeepBackup",
+                         @"foo",                        @"flags", nil];
+// New style
 NSDictionary *options = @{
     @"backup": @YES,
     @"daysToKeepBackup": @7,
@@ -170,13 +181,15 @@ NSDictionary *options = @{
 ######嵌套表达式 (Boxed Expressions)
 
 - 最新版本的 Objective-C 还提供了一种新的书写方式
-``` ObjC
-@( expression )
-```
+
+	``` ObjC
+	@( expression )
+	```
 
 ######Property
 
 - 升级到 Xcode 4.4 后，在头文件中创建的 @property 均无需再进行 @synthesize。Xcode 将自动生成
-``` ObjC
-@synthesize object = _object;
-```
+
+	``` ObjC
+	@synthesize object = _object;
+	```
