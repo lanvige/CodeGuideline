@@ -25,12 +25,27 @@
 - 逻辑的写法，大括号则位于同行
 ``` ObjC
 if (xxx == yyy)  {
+} else {
 }
 ```
 
 - Switch
 ``` ObjC
-- switch {
+switch (state) {
+        case AFOperationReadyState:
+            break;
+        default:
+            break;
+    }
+
+// 若是case里有逻辑语句
+switch (state) {
+	case AFOperationReadyState: {
+		// logic statement
+		break;
+	}
+	default:
+		break;
 }
 ```
 
