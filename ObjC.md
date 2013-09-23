@@ -231,9 +231,8 @@ NSDictionary *options = @{
 
 ######NS_ENUM
 
-```ObjC
 [Objective-C Enumeration, NS_ENUM & NS_OPTIONS](http://stackoverflow.com/questions/14080750/objective-c-enumeration-ns-enum-ns-options)
-
+```ObjC
 typedef NS_ENUM(NSInteger, MMType)
 {
     MMTypeA,
