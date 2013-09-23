@@ -229,6 +229,18 @@ NSDictionary *options = @{
 };
 ```
 
+######NS_ENUM
+
+```ObjC
+[Objective-C Enumeration, NS_ENUM & NS_OPTIONS](http://stackoverflow.com/questions/14080750/objective-c-enumeration-ns-enum-ns-options)
+
+typedef NS_ENUM(NSInteger, MMType)
+{
+    MMTypeA,
+    MMTypeB
+};
+```
+
 ######嵌套表达式 (Boxed Expressions)
 
 - 最新版本的 Objective-C 还提供了一种新的书写方式
